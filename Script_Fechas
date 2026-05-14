@@ -1,0 +1,31 @@
+let
+    FechaInicio = #date(2024, 1, 1),
+    FechaFin = #date(2026, 5, 19),
+    Duracion = Duration.Days(Duration.From(FechaFin - FechaInicio)) + 1,
+    Origen = List.Dates(FechaInicio, Duracion, #duration(1, 0, 0, 0)),
+    #"Convertido en tabla" = Table.FromList(Origen, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Convertido en tabla",{{"Column1", "Fecha"}}),
+    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"Fecha", type date}}),
+    #"Año insertado" = Table.AddColumn(#"Tipo cambiado", "Año", each Date.Year([Fecha]), Int64.Type),
+    #"Mes insertado" = Table.AddColumn(#"Año insertado", "Mes", each Date.Month([Fecha]), Int64.Type),
+    #"NombreMes insertado" = Table.AddColumn(#"Mes insertado", "NombreMes", each
+        let m = Date.Month([Fecha])
+        in if m = 1 then "Enero" else if m = 2 then "Febrero" else if m = 3 then "Marzo"
+        else if m = 4 then "Abril" else if m = 5 then "Mayo" else if m = 6 then "Junio"
+        else if m = 7 then "Julio" else if m = 8 then "Agosto" else if m = 9 then "Septiembre"
+        else if m = 10 then "Octubre" else if m = 11 then "Noviembre" else "Diciembre", type text),
+    #"Trimestre insertado" = Table.AddColumn(#"NombreMes insertado", "Trimestre", each Date.QuarterOfYear([Fecha]), Int64.Type),
+    #"Semana insertada" = Table.AddColumn(#"Trimestre insertado", "Semana", each Date.WeekOfYear([Fecha]), Int64.Type),
+    #"DiaSemana insertado" = Table.AddColumn(#"Semana insertada", "DiaSemana", each
+        let d = Date.DayOfWeek([Fecha], Day.Monday)
+        in if d = 0 then "Lunes" else if d = 1 then "Martes" else if d = 2 then "Miércoles"
+        else if d = 3 then "Jueves" else if d = 4 then "Viernes" else if d = 5 then "Sábado"
+        else "Domingo", type text),
+    #"NumDia insertado" = Table.AddColumn(#"DiaSemana insertado", "NumDia", each Date.Day([Fecha]), Int64.Type),
+    #"EsDiaLaboral insertado" = Table.AddColumn(#"NumDia insertado", "EsDiaLaboral", each
+        let d = Date.DayOfWeek([Fecha], Day.Monday)
+        in if d < 5 then "Sí" else "No", type text),
+    #"AñoMes insertado" = Table.AddColumn(#"EsDiaLaboral insertado", "AñoMes", each
+        Text.From(Date.Year([Fecha])) & "-" & Text.PadStart(Text.From(Date.Month([Fecha])), 2, "0"), type text)
+in
+    #"AñoMes insertado"
