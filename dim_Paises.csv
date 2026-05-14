@@ -1,0 +1,6 @@
+PaisID,PaisNombre,Region,ZonaHoraria,Moneda,TarifaHoraBase
+P001,USA,Norteamérica,EST,USD,150
+P002,CANADA,Norteamérica,EST,CAD,140
+P003,MEXICO,Norteamérica,CST,MXN,80
+P004,BRASIL,Sudamérica,BRT,BRL,60
+P005,COLOMBIA,Sudamérica,COT,COP,50

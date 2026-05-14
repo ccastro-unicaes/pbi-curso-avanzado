@@ -1,0 +1,16 @@
+ClienteID,NombreCliente,TipoEmpresa,PaisID,IngresosAnuales,AñoInicio,Activo
+C001,Tech Solutions Inc. #1,Tech,P002,463476,2021,Sí
+C002,Energía Solutions Inc. #2,Energía,P002,1249947,2023,Sí
+C003,Retail Solutions Inc. #3,Retail,P005,2778932,2020,Sí
+C004,Educación Solutions Inc. #4,Educación,P004,1370896,2020,Sí
+C005,Retail Solutions Inc. #5,Retail,P002,808662,2023,Sí
+C006,Educación Solutions Inc. #6,Educación,P001,1731993,2021,Sí
+C007,Retail Solutions Inc. #7,Retail,P003,2868362,2018,Sí
+C008,Telecom Solutions Inc. #8,Telecom,P003,1214593,2018,Sí
+C009,Telecom Solutions Inc. #9,Telecom,P001,4047208,2018,Sí
+C010,Telecom Solutions Inc. #10,Telecom,P003,2804999,2019,Sí
+C011,Retail Solutions Inc. #11,Retail,P003,2624388,2021,Sí
+C012,Energía Solutions Inc. #12,Energía,P002,716036,2021,Sí
+C013,Tech Solutions Inc. #13,Tech,P005,4184752,2019,Sí
+C014,Tech Solutions Inc. #14,Tech,P004,3902429,2020,Sí
+C015,Telecom Solutions Inc. #15,Telecom,P001,2592118,2022,Sí
